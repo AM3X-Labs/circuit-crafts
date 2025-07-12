@@ -23,7 +23,7 @@ Welcome to this repository! Hi, I am Kashyap a London based electronics & embedd
 - ESP32-Based Weather Station
 
 ## 📫 Connect with Me
-- **GitHub:** [Koda9496](https://github.com/Koda9496)
+- **GitHub:** [AM3X-Labs](https://github.com/Koda9496)
 - **LinkedIn:** *(https://www.linkedin.com/in/kashyapamesara/)*
 
 Stay tuned as I keep building and sharing more projects!
