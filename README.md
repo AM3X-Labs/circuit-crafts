@@ -24,7 +24,7 @@ Welcome to this repository! Hi, I am Kashyap a London based electronics & embedd
 
 ## 📫 Connect with Me
 - **GitHub:** [AM3X-Labs](https://github.com/AM3X-Labs)
-- **LinkedIn:** *(https://www.linkedin.com/in/kashyapamesara/)*
+- **LinkedIn:** *[Kashyap Amesara](https://www.linkedin.com/in/kashyapamesara/)*
 
 Stay tuned as I keep building and sharing more projects!
   
