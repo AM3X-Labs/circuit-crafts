@@ -1,0 +1,48 @@
+📑 AM3X-LABS Digital Business Card PCB
+An ultra-minimalist, battery-free, wireless networking device designed within standard credit card dimensions (ID-1 format). 
+Combining structural PCB art with high-frequency radio interaction, this card allows you to tap it against any modern smartphone to instantly launch a web-based portfolio landing page—giving visitors immediate options to view your GitHub, LinkedIn, or download your CV.
+
+🚀 Core Features
+• 100% Passive Operation: Zero batteries, external charging, or power management circuits required [●].
+• Dual LED Tap Indicators: Two blue surface-mount LEDs light up instantly upon contact to confirm successful data transfer.
+• Premium Industrial Aesthetics: Designed with a sleek matte-black solder mask backdrop, crisp white silkscreen typography, and exposed ENIG Gold accents.
+• Invisible Component Architecture: All physical components and trace routing are contained exclusively on the back layer; the front face remains perfectly smooth and free of visible electronics.
+
+🛠️ Hardware & Component Specs
+Mechanical Dimensions
+• Form Factor: Standard ID-1 (85.60 mm width × 53.98 mm height)
+• Corner Profiles: 3.18 mm fillet radius
+• Substrate Thickness: Recommended 0.80 mm or 1.00 mm FR4 fiberglass (to mimic standard credit card slimness instead of standard thick 1.60 mm boards).
+Bill of Materials (BOM)
+Reference	Qty	Description	Package Style	Function
+U1	1	NTAG I2C Plus (Dynamic NFC Tag)	TSSOP-8	Wireless energy harvester & NDEF storage [●]
+D1, D2	2	High-Brightness Blue Indicator LEDs	0603 Reverse-Mount	"Glow-through" visual feedback dots
+R1	1	Current Limiting Resistor (100 Ω, 5%)	0603 SMD	Protects indicator LEDs from power surges
+ANT1	1	Custom 4-Turn Spiral PCB Coil Antenna	Hand-drawn on B.Cu	13.56 MHz RF inductive power receiver [●]
+
+⚡ How It Works (Theory of Operation)
+1. RF Induction & Energy Harvesting
+The card operates via Inductive Coupling at a resonant frequency of 13.56 MHz (NFC Type 2/4 Tag Standard) [●]. When a smartphone brings its active NFC reader within 4 cm of the card, the phone emits an alternating magnetic field. This field cuts through the card’s 4-turn perimeter copper loop antenna, inducing an AC voltage.
+The NXP NT3H2111 chip receives this AC voltage through its LA and LB pins, routes it through an internal bridge rectifier, and outputs a steady DC voltage at Pin 5 (VOUT) [●].
+2. Microcontroller-less LED Activation
+Instead of an expensive, battery-draining microcontroller, the design leverages the chip's native hardware Field Detect (FD) pin.
+• Standby State: Pin 3 (FD) acts as an open switch (floating), keeping the circuit broken.
+• Active Scan State: The exact microsecond the chip successfully detects a phone's RF command, an internal MOSFET closes, pulling Pin 3 (FD) hard to Ground.
+• Result: This completes the circuit loop from VOUT through the LEDs and down to Ground, causing the two blue indicator lights to instantly flash under the phone's harvested power.
+
+🎨 PCB Layer Fabrication Guide (KiCad Implementation)
+To achieve the intended premium aesthetic, the design utilizes specific PCB layer mechanics inside KiCad:
+• Front Solder Mask (F.Mask) Clearances: Solder mask layers are negative graphics. Drawing matching tracks over our horizontal front copper lines strips away the protective black paint, instructing the factory to plate the text and graphics in flat, reflective Electroless Nickel Immersion Gold (ENIG).
+• Glow-Through Substrate Windows: By completely removing copper and solder mask from both front and back layers (F.Cu, F.Mask, B.Cu, B.Mask) inside the ring accent dots, two circular portholes of bare FR4 fiberglass substrate are created.
+• Reverse-Mount Soldering: The 0603 LEDs are soldered upside down on the back of the board, firing light forward through these raw fiberglass windows, creating a smooth diffused glow on the front surface with zero components poking through.
+
+📲 How to Program the Card
+Because the NXP NT3H2111 chip features non-volatile EEPROM memory that can be written to wirelessly, you do not need a computer or wired hardware programmers to configure it [●].
+1. Fully assemble and solder the bare PCB.
+2. Open your smartphone and download a free tag configuration application (such as NFC Tools or NFC TagWriter by NXP).
+3. Inside the app, select Write ➔ Add a record ➔ URL / URI.
+4. Input your unified link aggregator landing page (e.g., your free Linktree, GitHub Pages, or personal portfolio portfolio address).
+5. Click Write and bring your smartphone flat against the custom PCB card. The phone will instantly beam and lock your portfolio link into the chip's memory permanently!
+
+🤝 Contributing & License
+Feel free to fork this project, modify the front canvas artwork layers in KiCad, or adapt the schematic for your own hardware setups! Distributed under the MIT License.
